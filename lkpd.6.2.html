@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div id="container"></div>
+
+<button onclick="tambahElemen()">Tambah Elemen</button>
+
+<script>
+function tambahElemen() {
+  
+  const paragrafBaru = document.createElement("p");
+  paragrafBaru.textContent = "selamat datang di LKPD Nadira Silvia!";
+
+ 
+  document.getElementById("container").appendChild(paragrafBaru);
+}
+  
+  /* 1.document.getElementById() digunakan untuk mengambil elemen HTML berdasarkan nilai atribut id.
+  2.Untuk menambah elemen baru, langkahnya:
+
+Langkah-langkah:
+
+1.Buat elemen baru dengan document.createElement()
+
+2.(Opsional) Tambahkan teks menggunakan textContent atau innerHTML
+
+3.Tempelkan elemen baru ke halaman menggunakan appendChild() atau append()
+  */
+</script>
+
+</body>
+</html>
