@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>To-Do List dengan LocalStorage</title>
+</head>
+
+<body>
+
+    <h2>To-Do List</h2>
+
+    <!-- Input untuk menambah tugas -->
+    <input type="text" id="taskInput" placeholder="Tambahkan tugas...">
+    <button onclick="addTask()">Tambah</button>
+
+    <!-- Tempat menampilkan daftar tugas -->
+    <ul id="taskList"></ul>
+
+    <script>
+        let tasks = [];
+        let saved = localStorage.getItem("tasks");
+        if (saved) {
+            tasks = JSON.parse(saved); // ubah teks jadi array
+            tasks.forEach(function (t) {
+                tambahTaskKeHTML(t);     // tampilkan ke layar
+            });
+        }
+
+        function addTask() {
+            let input = document.getElementById("taskInput");
+            let taskText = input.value.trim();
+
+            if (taskText === "") {
+                alert("Isi dulu tugasnya!");
+                return;
+            }
+
+
+            tasks.push(taskText);
+
+            // Simpan ke localStorage
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+
+            // Tampilkan ke daftar HTML
+            tambahTaskKeHTML(taskText);
+
+            input.value = ""; // kosongkan input
+        }
+
+        // 4. FUNGSI UNTUK MEMBUAT <li> BARU DI HALAMAN
+        function tambahTaskKeHTML(taskText) {
+            let li = document.createElement("li");
+            li.textContent = taskText;
+
+            // Tombol hapus
+            let delBtn = document.createElement("button");
+            delBtn.textContent = " Hapus";
+
+            // Saat tombol hapus diklik
+            delBtn.onclick = function () {
+                li.remove();
+
+                // Hapus dari array
+                tasks = tasks.filter(t => t !== taskText);
+
+                // Simpan ulang ke localStorage
+                localStorage.setItem("tasks", JSON.stringify(tasks));
+            };
+
+            li.appendChild(delBtn);
+            document.getElementById("taskList").appendChild(li);
+        }
+    
+    /* 1.tantangan nya sulit memahamj kode tersebut.
+    2.Pengen tambah css tetapi blom mengerti lebih dalam tentang css dan waktunya juga sedikit
+    */
+    </script>
+
+</body>
+
+</html>
